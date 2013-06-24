@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  statistic_id: 1
+  key: MyString
+  value: MyString
+
+two:
+  statistic_id: 1
+  key: MyString
+  value: MyString

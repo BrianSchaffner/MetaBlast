@@ -1,0 +1,8 @@
+= content_for :content_left do
+  .well
+    .row
+      %h2
+        = display_bread_crumbs([@collection.group, @collection, 'Add a New Question'])
+			
+    .content		
+      = render :partial => 'form'

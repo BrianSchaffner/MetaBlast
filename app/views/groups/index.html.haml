@@ -1,0 +1,45 @@
+= content_for :content_left do
+  .row
+    .well
+      .page-header
+        %h2 Groups
+      
+      %table.table.table-bordered.table-striped
+        %thead
+          %th
+            Name
+          %th
+            Modules
+          %th
+            Members
+          %th
+            Show
+          %th
+            Edit
+          %th
+            Delete
+        - current_game_user.groups.each do |group|
+          %thead
+            %td
+              #{group.name}
+            %td
+              = link_to "View", group_collections_path(group)
+            %td
+              = link_to "View", group_members_path(group)
+            %td
+              = link_to 'Show', group
+            %td
+              = link_to 'Edit', edit_group_path(group)
+            %td
+              = link_to 'Delete', group_path(group), :method => :delete, :confirm => 'Are you sure you want to remove this group?'
+              
+= content_for :content_right do
+  .row
+    .well
+      %ul.nav.nav-list
+        %li.nav-header
+          Toolbar
+        %li 
+          = link_to new_group_path do 
+            %i.icon-plus
+            Add a group

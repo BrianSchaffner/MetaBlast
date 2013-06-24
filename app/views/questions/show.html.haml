@@ -1,0 +1,40 @@
+= content_for :content_left do
+  .well  
+    .row
+      .page-header
+        %h2
+          = display_bread_crumbs([@question.collection.group, @question.collection, @question.content])
+          
+  .row
+    .well
+      .page-header.dashboard-header
+        %h2
+          Answers
+      %table.table.table-bordered.table-striped
+        %thead
+          %tr
+            Content
+          %th
+            Correct?
+        - @question.answers.each do |answer|
+          %tr
+            %td
+              #{answer.content}
+            %td
+              #{answer.correct}
+              
+= content_for :content_right do     
+  - if can? :access, @question
+    .row
+      .well
+        %ul.nav.nav-list
+          %li.nav-header
+            Admin Options
+          %li
+            =link_to edit_question_path(@question) do
+              %i.icon-edit
+              Edit Question
+          %li
+            = link_to @question, :method => :delete, :confirm => 'Are you sure you want to remove this question? THIS IS IRREVERSIBLE' do
+              %i.icon-remove
+              Remove 

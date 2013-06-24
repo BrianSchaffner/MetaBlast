@@ -1,0 +1,23 @@
+= form_for([@collection, @question]) do |f|
+  = render :partial => 'shared/error_messages', :locals => {:errorable => @question}
+  
+  .fields
+    .field
+      = f.label :question_title
+      = f.text_area :content, :rows => 5
+      <span title=" the 'Title' box is for title of the question">[?]</span>
+      
+    .field
+      = f.label :feedback
+      = f.text_area :feedback, :rows => 5
+      <span title=" the 'Feedback' box is for commentary/addtional information on the question">[?]</span>
+      
+    = f.fields_for :answers do |a|
+      .field
+        = a.label :Answer
+        = a.text_area :content, :rows => 1
+        = a.label :correct, '^ Correct?'
+        = a.check_box :correct
+    
+  .submit_button
+    = f.submit "Create question", :class => 'btn btn-primary'

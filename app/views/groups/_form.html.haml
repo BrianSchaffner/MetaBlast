@@ -1,0 +1,10 @@
+= form_for @group do |f|
+  = render 'shared/error_messages', :errorable => @group
+  
+  .fields
+    .field
+      = f.label :name
+      = f.text_field :name
+  
+  .submit_button
+    = f.submit "Create Group", :class => 'btn btn-primary'

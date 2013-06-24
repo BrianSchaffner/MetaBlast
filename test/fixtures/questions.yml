@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  x_pos: 1.5
+  y_pos: 1.5
+  z_pos: 1.5
+  game_user_id: 1
+  content: MyText
+  feedback: MyText
+
+two:
+  x_pos: 1.5
+  y_pos: 1.5
+  z_pos: 1.5
+  game_user_id: 1
+  content: MyText
+  feedback: MyText

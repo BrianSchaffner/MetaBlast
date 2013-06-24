@@ -1,0 +1,32 @@
+<h1>Listing questions</h1>
+
+<table>
+  <tr>
+    <th>X pos</th>
+    <th>Y pos</th>
+    <th>Z pos</th>
+    <th>Game user</th>
+    <th>Content</th>
+    <th>Feedback</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @questions.each do |question| %>
+  <tr>
+    <td><%= question.x_pos %></td>
+    <td><%= question.y_pos %></td>
+    <td><%= question.z_pos %></td>
+    <td><%= question.game_user_id %></td>
+    <td><%= question.content %></td>
+    <td><%= question.feedback %></td>
+    <td><%= link_to 'Show', question %></td>
+    <td><%= link_to 'Edit', edit_question_path(question) %></td>
+    <td><%= link_to 'Destroy', question, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+

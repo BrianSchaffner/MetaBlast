@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  game_user_id: 1
+  group_id: 1
+  role_id: 1
+
+two:
+  game_user_id: 1
+  group_id: 1
+  role_id: 1

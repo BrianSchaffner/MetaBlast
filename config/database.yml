@@ -1,0 +1,22 @@
+login: &login
+  adapter: mysql2
+  host: localhost
+  username: metablast
+  password: vr@ctpp31tm!
+
+development:
+  adapter: <%= "jdbc" if defined?(JRUBY_PLATFORM) %>sqlite3
+  database: db/development.sqlite3
+  timeout: 5000
+
+test:
+  database: mb_refinery_turtle_test
+  <<: *login
+
+production:
+  database: mb_refinery_turtle_prod
+  adapter: mysql2
+  host: localhost
+  username: metablast
+  password: vr@ctpp31tm!
+

@@ -1,0 +1,31 @@
+= content_for :content_left do            
+  .row
+    .well
+      .page-header
+        %h2 Search Results:
+      
+      - if @groups.empty?
+        .content
+          No results for that search criteria, sorry.
+      - else
+        %table.table.table-bordered.table-striped
+          %thead
+            %tr
+              %th
+                Name
+              %th
+                Number of Members
+              %th
+                Join
+          - @groups.each do |group|
+            %tbody
+              %td
+                - if current_game_user.admin_in_group?(group)
+                  #{link_to group.name, group}*
+                - else
+                  #{link_to group.name, group}
+              %td
+                #{group.game_users.length}
+              %td
+                = link_to group_join_path(group), :method => :post do
+                  %i.icon-plus-sign

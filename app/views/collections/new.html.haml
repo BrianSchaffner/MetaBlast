@@ -1,0 +1,9 @@
+= content_for :content_left do
+  .well
+    .row
+      .page-header
+        %h2
+          = display_bread_crumbs([@group, 'Add a New Module'])
+
+    .content
+      = render :partial => 'form'

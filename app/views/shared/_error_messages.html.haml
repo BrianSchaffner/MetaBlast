@@ -1,0 +1,9 @@
+- if errorable.errors.any?
+	#error_explanation
+		%h2
+			= pluralize(errorable.errors.count, "error")
+			prohibited this from being saved.
+
+		%ul
+			- errorable.errors.full_messages.each do |msg|
+				%li= msg

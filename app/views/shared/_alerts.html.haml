@@ -1,0 +1,24 @@
+- if !flash.empty?
+  - if flash[:error]
+    .row
+      .alert.alert-error
+        %a.close{'data-dismiss' => 'alert'}
+          x
+        %h4.alert-heading Error!
+        = flash[:error]
+      
+  - elsif flash[:notice]
+    .row
+      .alert.alert-success
+        %a.close{'data-dismiss' => 'alert'}
+          x
+        %h4.alert-heading Notice!
+        = flash[:notice]
+      
+  - elsif flash[:alert]
+    .row
+      .alert.alert-error
+        %a.close{'data-dismiss' => 'alert'}
+          x
+        %h4.alert-heading Alert!
+        = flash[:alert]

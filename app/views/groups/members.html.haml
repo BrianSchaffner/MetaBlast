@@ -1,0 +1,30 @@
+= content_for :content_left do
+  .well
+    .row
+      .page-header
+        %h2= display_bread_crumbs([@group, 'Members'])
+      
+    %table.table.table-bordered.table-striped
+      %thead
+        %tr 
+          %th Email
+          %th Remove
+          %th Make Admin
+          %th Remove Admin
+      - @members.each do |member|
+        %tbody
+          %td #{member.email}
+          %td= link_to image_tag('delete.png'), group_remove_member_path(:game_user_id => member.id), :method => :post, :confirm => 'Are you sure you want to remove this user?'
+          %td= link_to 'Make Admin', group_make_admin_path(:game_user_id => member.id), :method => :post
+          %td= link_to 'Remove Admin', group_remove_admin_path(:game_user_id => member.id), :method => :post
+ 
+= content_for :content_right do
+  .row
+    .well
+      %ul.nav.nav-list
+        %li.nav-header
+          General Options
+        %li  
+          = link_to group_invite_path(@group) do
+            %i.icon-user
+            Invite User

@@ -1,0 +1,105 @@
+= content_for :content_left do
+  .row
+    .well
+      .page-header.dashboard-header
+        %h2= @group.name
+      %table.table.table-bordered.table-striped
+        %thead
+          %tr
+            %th Number of Members:
+            %th Owner:
+        %tbody
+          %tr
+            %td
+              #{@group.game_users.length}
+            %td.last
+              #{@group.owner.email}
+          
+        
+  .row
+    .well
+      .page-header.dashboard-header
+        %h2 Modules
+
+      - if @group.collections.empty?
+        You have no modules yet, please create one from the link to the right.
+      - else
+        %table.table.table-bordered.table-striped
+          %thead
+            %tr
+              %th
+                Name
+              %th
+                Description
+              %th
+                Number of Questions:
+          - @group.collections.each do |collection|
+            %tbody
+              %td
+                #{link_to collection.name, collection}
+              %td
+                #{collection.description}
+              %td
+                #{collection.questions.length}
+
+  - if can? :access, @group
+    .row
+      .well
+        .page-header.dashboard-header
+          %h2 Join Requests
+        - if @pending_joins.empty?
+          No join requests at this time.
+        - else
+          %table.table.table-bordered.table-striped
+            %thead
+              %tr
+                %th
+                  Email
+                %th
+                  Accept
+                %th
+                  Reject
+            - @pending_joins.each do |pj|
+              %tbody
+                %tr
+                  %td
+                    = pj.game_user.email
+                  %td
+                    = link_to image_tag('add.png'), group_accept_member_path(pj.group, :game_user_group_id => pj.id), :method => :post
+                  %td
+                    = link_to image_tag('delete.png'), group_reject_member_path(pj.group, :game_user_group_id => pj.id), :method => :post
+  
+          
+= content_for :content_right do
+  .row
+    .well
+      %ul.nav.nav-list
+        %li.nav-header
+          General options
+        %li
+          = link_to group_members_path(@group) do
+            %i.icon-th-list
+            View Members
+      
+  - if can? :access, @group
+    .row
+      .well
+        %ul.nav.nav-list
+          %li.nav-header
+            Admin options
+          %li
+            = link_to new_group_collection_path(@group) do
+              %i.icon-plus
+              Add a Module
+          %li
+            = link_to group_invite_path(@group) do
+              %i.icon-user
+              Invite User
+          %li
+            = link_to groups_path do 
+              %i.icon-edit
+              Edit Groups
+          %li
+            = link_to group_path(@group), :method => :delete, :confirm => 'Are you sure you want to remove this group? THIS IS IRREVERSIBLE' do
+              %i.icon-remove
+              Remove group

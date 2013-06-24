@@ -1,0 +1,68 @@
+!!!
+%html
+  %head
+    .nav
+    %title Meta!Blast Web Module
+    = stylesheet_link_tag 'application'
+    = javascript_include_tag 'application', 'https://www.google.com/jsapi'
+    = csrf_meta_tags
+    %link{:href => 'http://fonts.googleapis.com/css?family=Droid+Sans:400,700', :rel => 'stylesheet', :type => 'text/css'}
+    
+
+  %body
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          %a.btn.btn-navbar{'data-toggle' => 'collapse', 'data-target' => '.nav-collapse'}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar	  
+          %a.brand{ :href => 'http://metablastapi.vrac.iastate.edu/'} Meta!Blast
+          .nav-collapse		  
+            %ul.nav
+              %li.active
+                %a{ :href => '#'} Admin
+              %li
+                %a{ :href => '#'} Settings
+              %li
+                /links to youtube help video which needs to be redone
+                %a{ :href => 'http://www.youtube.com/watch?v=MMTqc3bbIIM'} Help
+                  
+          %ul.nav.pull-right
+            - if game_user_signed_in?
+              %li
+                %span
+                  Hey, #{current_game_user.username}
+              %li.divider-vertical
+              %li
+                = link_to destroy_game_user_session_path, :method => :delete do
+                  %i.icon-off.icon-white
+                  Sign Out
+              %li.divider-vertical
+              %li.dropdown
+                %a.dropdown-toggle{'data-toggle' => 'dropdown'}
+                  %i.icon-cog.icon-white
+                  %span.caret
+                %ul.dropdown-menu
+                  %li.nav-header
+                    Account
+                  %li
+                    = link_to root_path do
+                      %i.icon-cog
+                      Settings
+                  %li.divider
+                  %li
+                    = link_to destroy_game_user_session_path, :method => :delete do
+                      %i.icon-off
+                      Sign Out
+                      
+    .container{:style => "margin-top: 35px"}
+      .row
+        .span12
+          = render 'shared/alerts'
+
+          = yield
+          = yield :content_left
+
+        .span3.offset1
+          = yield :content_right

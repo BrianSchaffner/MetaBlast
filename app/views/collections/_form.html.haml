@@ -1,0 +1,16 @@
+= form_for([@group, @collection]) do |f|
+  = render 'shared/error_messages', :errorable => @collection
+  
+  .fields
+    .field
+      = f.label :name
+      = f.text_field :name
+      <span title=" the 'Name' box is for the title of the module/question set">[?]</span>
+    .field
+      = f.label :description
+      = f.text_area :description
+      <span title=" the 'Description' box is for any information about the question set (for example 'Photosynthesis' could have the description 'Questions about the chloroplast') "">[?]</span>
+
+  .submit_button
+    = f.submit "Create module", :class => 'btn btn-primary'
+  

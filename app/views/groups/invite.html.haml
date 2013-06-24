@@ -1,0 +1,14 @@
+= content_for :content_left do
+  .well
+    .row
+      .page-header
+        %h2= display_bread_crumbs([@group, 'Invite a User'])
+				
+    = form_tag(group_send_invite_path(@group)) do
+      .fields
+        .field
+          = label_tag :email
+          = email_field_tag :email
+            
+      .submit_button
+        = submit_tag "Invite", :class => 'btn btn-primary'

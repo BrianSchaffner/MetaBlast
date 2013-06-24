@@ -1,0 +1,14 @@
+= content_for :content_left do
+  .well
+    .row
+      .page-header
+        %h2 Find a Group
+    .content
+      = form_tag(groups_search_path) do
+        .fields
+          .field
+            = label_tag :email, 'E-mail of Admin/Owner'
+            = email_field_tag :email
+            
+        .submit_button
+          = submit_tag 'Search for Group', :class => 'btn btn-primary'

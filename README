@@ -1,0 +1,6 @@
+To deploy to Passenger on Meta!Blast's server you will need to:
+  bundle install --without production test
+	bundle --deployment
+	rake assets:precompile 
+	
+Then you should be good to go.  

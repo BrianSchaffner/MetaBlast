@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  token: MyString
+  deleted_at: 2011-08-24 19:45:01
+  game_user_id: 1
+
+two:
+  token: MyString
+  deleted_at: 2011-08-24 19:45:01
+  game_user_id: 1

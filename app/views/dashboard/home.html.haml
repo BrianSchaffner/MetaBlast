@@ -1,0 +1,119 @@
+
+= content_for :content_left do
+  .row
+    .well
+      .page-header.dashboard-header
+        %h2 My Meta!Blast Account Snapshot
+        
+      %table.table.table-bordered.table-striped
+        %thead
+          %tr
+            %th Member of:    
+            %th Pending invitations:
+        %tbody
+          %tr
+            %td
+              #{current_game_user.groups.length} Groups
+            %td.last
+              #{@pending_invites.length}
+  .row         
+    .well
+      .page-header.dashboard-header
+        %h2 My Groups
+        
+      %table.table.table-bordered.table-striped
+        %thead
+          %tr
+            %th
+              Name:
+            %th
+              Number of Members:
+          %tbody
+            - current_game_user.groups.each do |group|
+              %tr
+                %td
+                  - if current_game_user.admin_in_group?(group)
+                    #{link_to group.name, group}*
+                  - elsif cannot? :read, group
+                    #{group.name} - Pending Admin Approval
+                  - else
+                    #{link_to group.name, group}
+                    
+                %td
+                  #{group.game_users.length}
+                
+  .row
+    .well
+      .page-header.dashboard-header
+        %h2 Popular Groups
+        
+      %table.table.table-bordered.table-striped
+        %thead
+          %tr
+            %th
+              Name:
+            %th
+              Number of Members:
+            %th
+              Join:
+        %tbody
+          - Group.limit(10).each do |group|
+            %tr
+              %td
+                - if current_game_user.admin_in_group?(group)
+                  #{link_to group.name, group}*
+                - else
+                  #{link_to group.name, group}
+              %td
+                #{group.game_users.length}
+              %td
+                = link_to group_join_path(group), :method => :post do
+                  %i.icon-plus-sign
+              
+  .row
+    .well
+      .page-header.dashboard-header
+        %h2 My Invitations
+      - if @pending_invites.length > 0 
+        %table.table.table-bordered.table-striped
+          %tbody
+            %tr
+              %th
+                Group Name
+              %th
+                Accept
+              %th
+                Reject
+          %thead
+            - @pending_invites.each do |invite|
+              %tr
+                %td
+                  = invite.group.name
+                %td
+                  = link_to 'Accept', group_accept_invite_path(invite.group, :game_user_group_id => invite.id), :method => :post
+                %td
+                  = link_to 'Reject', group_reject_invite_path(invite.group, :game_user_group_id => invite.id), :method => :post
+      - else
+        You currently have no pending invites, hooray!
+
+
+  
+= content_for :content_right do
+  .row
+    .well
+      %ul.nav.nav-list
+        %li.nav-header
+          Toolbar
+        %li
+          = link_to new_group_path do
+            %i.icon-plus
+            Add a Group 
+        %li
+          = link_to groups_find_path do
+            %i.icon-comment
+            Find a Group
+        %li
+          = link_to groups_path do 
+            %i.icon-edit
+            Edit Groups 
+            /don't like how this works should #refactor - brian   

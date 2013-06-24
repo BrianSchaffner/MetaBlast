@@ -1,0 +1,33 @@
+%html
+  %head
+    = stylesheet_link_tag 'bootstrap'
+    %body
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          %a.btn.btn-navbar{'data-toggle' => 'collapse', 'data-target' => '.nav-collapse'}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar	  
+          %a.brand Meta!Blast
+          .nav-collapse		  
+            %ul.nav
+              %li.active
+                %a{ :href => '#'} Admin
+              %li
+                %a{ :href => '#'} Settings
+              %li
+                %a{ :href => '#'} Help
+              %li
+                - if game_user_signed_in?
+                  #{link_to 'Sign Out', destroy_game_user_session_path, :method => :delete}
+                - else
+                  - #{link_to 'Sign In', new_game_user_session_path}	
+    #account_functions
+      %span{:id => 'user_sign_in'}
+        - if game_user_signed_in?
+          <strong>#{current_game_user.email} is signed in.</strong> -
+          %span{:id => 'user_sign_out'}
+            (#{link_to 'Sign Out', destroy_game_user_session_path, :method => :delete})
+        - else
+          Currently not signed in - #{link_to 'Sign In', new_game_user_session_path}

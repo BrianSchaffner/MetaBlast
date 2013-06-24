@@ -1,0 +1,51 @@
+= content_for :content_left do
+  .row
+    .well
+      .page-header
+        %h2= display_bread_crumbs([@collection.group, @collection])
+        
+      %table.table.table-bordered.table-striped
+        %thead
+          %tr 
+            %th Number of Questions:
+          %tbody
+            %td.last
+              #{@collection.questions.length}
+          
+  .row
+    .well
+      .page-header.dashboard-header
+        %h2 Questions
+      - if @collection.questions.empty?
+        You have no questions yet, please create one from the link to the right.
+      - else
+        %table.table.table-bordered.table-striped
+          %thead
+            %tr 
+              Content
+          - @collection.questions.each do |question|
+            %tr
+              %td
+                #{link_to question.content, question}
+
+      
+= content_for :content_right do      
+  - if can? :access, @collection
+    .row
+      .well
+        %ul.nav.nav-list
+          %li.nav-header
+            Admin Options          
+          %li
+            = link_to new_collection_question_path(@collection) do
+              %i.icon-plus
+              Add Question
+          %li
+            = link_to collection_path, :method => :delete, :confirm => 'Are you sure you want to remove this Module? THIS IS IRREVERSIBLE AND INCLUDES ALL QUESTIONS' do
+              %i.icon-remove
+              Remove
+          %li
+            = link_to groups_path do
+              %i.icon-adjust
+              Merge Module
+  
